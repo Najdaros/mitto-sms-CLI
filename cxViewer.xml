@@ -1,0 +1,9 @@
+<application>
+  <component name="cxViewer">
+    <option name="loginSuccessful" value="true" />
+    <option name="password" value="wP7NiBx40Is=" />
+    <option name="serverUrl" value="https://sast.security.indazn.com" />
+    <option name="userName" value="" />
+    <option name="loginMethod" value="SAML" />
+  </component>
+</application>
