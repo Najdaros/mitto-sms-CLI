@@ -1,2 +1,2 @@
-# mitto-sms-CLI
+# mitto-mitto.sms-CLI
 SMS delivery + fees and stats
