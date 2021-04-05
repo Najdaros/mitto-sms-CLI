@@ -26,7 +26,7 @@ public interface SmsRepository extends Repository<SMS>{
      * Similar to findTopSendersWithFee, working with countryName instead
      * @return map where key represent countryName name and value is pair of number of message occurrences and overall sum of prices for messages
      */
-    List<StatsDTO> getgetCountryFeeStats();
+    List<StatsDTO> getCountryFeeStats();
 
     /**
      * Finding all messages filtered by success column

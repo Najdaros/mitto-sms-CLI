@@ -20,10 +20,11 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
 @Component("programArgumentHandler")
 /**
- * The ProgramArgumentHandler class provides base operation to initialise UserInterface and main Service
+ * The SmsCli class provides base operation to initialise UserInterface and main Service
  * for handling user inputs via registered Commands
  * UserInterface and Service Configuration is set by input programArguments
  * supported program line arguments:
@@ -34,19 +35,19 @@ import java.io.PrintWriter;
  * Handling program arguments is provided by {@link CommandLineParser}
  *
  */
-public class ProgramArgumentHandler {
+public class SmsCli {
 
     private CommandLineParser parser;
     private Options options;
     private final UserInterface userInterface;
     private final Service service;
 
-    @Autowired
     /**
-     * ProgramArgumentHandler Constructor
+     * SmsCli Constructor
      * autowiring object implementation of UserInterface and Service by value parameters
      */
-    public ProgramArgumentHandler(@Value("#{userConsole}") UserInterface userInterface, @Value("#{smsService}")Service service) {
+    @Autowired
+    public SmsCli(@Value("#{userConsole}") UserInterface userInterface, @Value("#{smsService}")Service service) {
         initArgumentParser();
         this.userInterface = userInterface;
         this.service = service;
@@ -104,12 +105,12 @@ public class ProgramArgumentHandler {
         }
     }
     private void printHelp() {
-//        TODO
-//        String header = "Program arguments description\n\n";
-//
-//        HelpFormatter formatter = new HelpFormatter();
-//        PrintWriter pw = new PrintWriter(userInterface.getPrintStream());
-//        formatter.printHelp(pw, formatter.getWidth(), "Program", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
-//        pw.flush();
+        String header = "Program arguments description\n\n";
+        HelpFormatter formatter = new HelpFormatter();
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter pw = new PrintWriter(stringWriter);
+        formatter.printHelp(pw, formatter.getWidth(), "Program", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
+        pw.flush();
+        userInterface.displayMessage(stringWriter.toString());
     }
 }

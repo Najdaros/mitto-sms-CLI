@@ -87,7 +87,7 @@ public class SmsRepositoryImpl implements SmsRepository {
     }
 
     @Override
-    public List<StatsDTO> getgetCountryFeeStats() {
+    public List<StatsDTO> getCountryFeeStats() {
         List<SMS> messages = findAllSuccess(Boolean.TRUE);
         HashMap<String, Long> senderOccurrenceMap = getOccurrenceMap(messages, sms -> sms.getCountryFee().getCountryName());
         HashMap<String, BigDecimal> countryFeeMap = getFeeStatsMap(messages, sms -> sms.getCountryFee().getCountryName(), sms -> true);

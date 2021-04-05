@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Component("userConsole")
 /**
@@ -99,11 +100,12 @@ public class UserConsole implements UserInterface{
 
     @Override
     public void displaySendersStats(List<StatsDTO> sendersStats) {
-        displayMessage("Top Sender Stats:\n" + sendersStats.toString());
+        displayMessage("Top Sender Stats:\n" + sendersStats.stream().map(StatsDTO::toString).collect(Collectors.joining(" ")));
     }
 
     @Override
     public void displayCountryStats(List<StatsDTO> countryStats) {
+        displayMessage("Top Sender Stats:\n" + countryStats.stream().map(StatsDTO::toString).collect(Collectors.joining(" ")));
         displayMessage("Country Stats:\n" + countryStats.toString());
     }
 

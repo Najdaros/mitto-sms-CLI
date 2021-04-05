@@ -18,24 +18,11 @@ public class StatsDTO {
         this.optionalTotalPrice = Optional.ofNullable(totalPrice);
     }
 
-    public Long getOccurency() {
-        return occurency;
-    }
-
-    public Optional<BigDecimal> getOptionalTotalPrice() {
-        return optionalTotalPrice;
-    }
-
-    public String getStatsName() {
-        return statsName;
-    }
-
     @Override
     public String toString() {
         StringBuilder statsBuilder = new StringBuilder();
         statsBuilder.append(statsName).append(" ").append(occurency);
-        if (optionalTotalPrice.isPresent())
-            statsBuilder.append(" ").append(getOptionalTotalPrice().get().toString());
-        return statsName.toString();
+        optionalTotalPrice.ifPresent(bigDecimal -> statsBuilder.append(" ").append(bigDecimal.toString()));
+        return statsBuilder.toString();
     }
 }

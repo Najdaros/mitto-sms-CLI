@@ -11,6 +11,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 /**
@@ -47,14 +48,14 @@ public class StatsCommand implements Command {
 
                 CommandLine cmd = parser.parse(options, args);
                 if (cmd.hasOption("h")) {
-//                    TODO
-//                    String header = "Stats command description\n\n";
-//
-//                    HelpFormatter formatter = new HelpFormatter();
-//                    PrintWriter pw = new PrintWriter(userInterface.getPrintStream());
-//                    formatter.printHelp(pw, formatter.getWidth(), "stats", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
-//                    pw.flush();
-//                    return true;
+                    String header = "Stats command description\n\n";
+                    StringWriter stringWriter = new StringWriter();
+                    HelpFormatter formatter = new HelpFormatter();
+                    PrintWriter pw = new PrintWriter(stringWriter);
+                    formatter.printHelp(pw, formatter.getWidth(), "stats", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
+                    pw.flush();
+                    userInterface.displayMessage(stringWriter.toString());
+                    return true;
                 }
                 if (cmd.hasOption("s")) {
 

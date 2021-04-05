@@ -62,7 +62,7 @@ public class SmsService implements Service {
 
     @Override
     public List<StatsDTO> getCountryFeeStats() {
-        return smsRepository.getgetCountryFeeStats();
+        return smsRepository.getCountryFeeStats();
     }
 
 
