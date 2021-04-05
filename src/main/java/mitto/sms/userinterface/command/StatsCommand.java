@@ -47,40 +47,31 @@ public class StatsCommand implements Command {
 
                 CommandLine cmd = parser.parse(options, args);
                 if (cmd.hasOption("h")) {
-                    String header = "Stats command description\n\n";
-
-                    HelpFormatter formatter = new HelpFormatter();
-                    PrintWriter pw = new PrintWriter(userInterface.getPrintStream());
-                    formatter.printHelp(pw, formatter.getWidth(), "stats", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
-                    pw.flush();
-                    return true;
+//                    TODO
+//                    String header = "Stats command description\n\n";
+//
+//                    HelpFormatter formatter = new HelpFormatter();
+//                    PrintWriter pw = new PrintWriter(userInterface.getPrintStream());
+//                    formatter.printHelp(pw, formatter.getWidth(), "stats", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
+//                    pw.flush();
+//                    return true;
                 }
                 if (cmd.hasOption("s")) {
 
-                    printTopSendersStats();
+                    userInterface.displaySendersStats( service.getTopSendersStats(5));
                     return true;
                 }
                 if (cmd.hasOption("c") || isEmptyCommandArgumentList(cmd.getArgList())) {
 
-                    printCountryStats();
+                    userInterface.displayCountryStats(service.getCountryFeeStats());
                     return true;
                 }
             }
         } catch (ParseException e) {
-            userInterface.print("Stats command parsing exception: "+e.getMessage());
-            e.printStackTrace(userInterface.getPrintStream());
+            userInterface.displayMessage("Stats command parsing exception: "+e.getMessage());
+//            e.printStackTrace(userInterface.getPrintStream());
         }
         return false;
-    }
-
-    public void printTopSendersStats() {
-        String countryFeeStats = String.join("\n", service.getTopSendersFormatted(5));
-        userInterface.print("Top Sender Stats:\n" + countryFeeStats + "\n");
-    }
-
-    private void printCountryStats() {
-        String countryFeeStats = String.join("\n", service.getCountryFeeFormatted());
-        userInterface.print("Country Fee Stats:\n" + countryFeeStats + "\n");
     }
 
     private static boolean isEmptyCommandArgumentList(List<String> argList) {

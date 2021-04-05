@@ -1,6 +1,6 @@
 package mitto.sms.hibernate.repository;
 
-import javafx.util.Pair;
+import mitto.sms.hibernate.StatsDTO;
 import mitto.sms.hibernate.entity.SMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,6 @@ import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -63,44 +62,39 @@ public class SmsRepositoryImpl implements SmsRepository {
 
 
     @Override
-    public LinkedHashMap<String, Long> findTopSenders(Integer limit) {
+    public List<StatsDTO> findTopSenders(Integer limit) {
         List<SMS> messages = findAll();
-        HashMap<String, Long> senderFrequencyMap = getFrequencyMap(messages, SMS::getSender);
+        HashMap<String, Long> senderFrequencyMap = getOccurrenceMap(messages, SMS::getSender);
         return senderFrequencyMap.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .limit(limit)
-                .collect(Collectors.toMap(Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (v1, v2) -> v1,
-                        LinkedHashMap::new));
+                .map(entry -> new StatsDTO(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public LinkedHashMap<String, Pair<Long, BigDecimal>> findTopSendersWithFee(Integer limit) {
+    public List<StatsDTO> findTopSendersWithFee(Integer limit) {
         List<SMS> messages = findAllSuccess(Boolean.TRUE);
-        HashMap<String, Long> senderFrequencyMap = getFrequencyMap(messages, SMS::getSender);
-        List<String> topSendersOrdered = senderFrequencyMap.entrySet().stream()
+        HashMap<String, Long> senderOccurrenceMap = getOccurrenceMap(messages, SMS::getSender);
+        List<String> topSendersOrdered = senderOccurrenceMap.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .limit(limit).map(Map.Entry::getKey).collect(Collectors.toList());
 
         HashMap<String, BigDecimal> sendersFeeMap = getFeeStatsMap(messages, SMS::getSender, sms -> topSendersOrdered.contains(sms.getSender()));
-        return topSendersOrdered.stream().collect(Collectors.toMap(Function.identity(),
-                sender->new Pair<>(senderFrequencyMap.get(sender), sendersFeeMap.get(sender)),
-                        (v1, v2) -> v1,
-                        LinkedHashMap::new));
+        return topSendersOrdered.stream()
+                .map(sender -> new StatsDTO(sender, senderOccurrenceMap.get(sender),sendersFeeMap.get(sender)))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public LinkedHashMap<String, Pair<Long, BigDecimal>> getFeeCountryStats() {
+    public List<StatsDTO> getgetCountryFeeStats() {
         List<SMS> messages = findAllSuccess(Boolean.TRUE);
-        HashMap<String, Long> senderFrequencyMap = getFrequencyMap(messages, sms -> sms.getCountryFee().getCountryName());
+        HashMap<String, Long> senderOccurrenceMap = getOccurrenceMap(messages, sms -> sms.getCountryFee().getCountryName());
         HashMap<String, BigDecimal> countryFeeMap = getFeeStatsMap(messages, sms -> sms.getCountryFee().getCountryName(), sms -> true);
-        return senderFrequencyMap.entrySet().stream()
+        return senderOccurrenceMap.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(Collectors.toMap(Map.Entry::getKey,
-                entry->new Pair<>(entry.getValue(), countryFeeMap.get(entry.getKey())),
-                (v1, v2) -> v1,
-                LinkedHashMap::new));
+                .map(entry -> new StatsDTO(entry.getKey(), entry.getValue(), countryFeeMap.get(entry.getKey())))
+                .collect(Collectors.toList());
     }
 
     private HashMap<String, BigDecimal> getFeeStatsMap(List<SMS> messages, Function<SMS, String> keyFunction, Predicate<SMS> filter) {
@@ -115,7 +109,7 @@ public class SmsRepositoryImpl implements SmsRepository {
                         Collectors.reducing(BigDecimal.ZERO, sms -> sms.getCountryFee().getPrice(), BigDecimal::add)));
     }
 
-    private HashMap<String, Long> getFrequencyMap(List<SMS> messages, Function<SMS, String> keyFunction) {
+    private HashMap<String, Long> getOccurrenceMap(List<SMS> messages, Function<SMS, String> keyFunction) {
         return messages.stream().collect(
                 Collectors.groupingBy(
                         keyFunction,

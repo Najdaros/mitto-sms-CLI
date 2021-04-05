@@ -1,5 +1,7 @@
-package mitto.sms.userinterface;
+package mitto.sms.userinterface.consoleinterface;
 
+import mitto.sms.hibernate.StatsDTO;
+import mitto.sms.userinterface.UserInterface;
 import mitto.sms.userinterface.parsing.exception.ParsingException;
 import mitto.sms.userinterface.command.UserCommandsHandler;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 @Component("userConsole")
@@ -17,7 +20,7 @@ import java.util.Scanner;
  *
  * @see UserInterface
  */
-public class UserConsoleImpl implements UserInterface{
+public class UserConsole implements UserInterface{
 
     private Boolean running = Boolean.TRUE;
     private final PrintStream printStream = System.out;
@@ -28,14 +31,14 @@ public class UserConsoleImpl implements UserInterface{
     /**
      * Default constructor
      */
-    public UserConsoleImpl() {
+    public UserConsole() {
     }
 
     /**
      * Starts system console for reading human inputs
      */
     public void run() {
-        print("Opening user input console...");
+        displayMessage("Opening user input console...");
         run(new Scanner(inputStream));
     }
 
@@ -45,7 +48,7 @@ public class UserConsoleImpl implements UserInterface{
      * @throws FileNotFoundException exception thrown when no such file exists
      */
     public void run(File file) throws FileNotFoundException {
-        print("Processing file... "+file.getName());
+        displayMessage("Processing file... "+file.getName());
         run(new Scanner(file));
     }
 
@@ -57,7 +60,7 @@ public class UserConsoleImpl implements UserInterface{
                 try {
                     commandsHandler.handle(input);
                 } catch (ParsingException e) {
-                    print(e.getMessage());
+                    displayMessage(e.getMessage());
                 }
             }
 
@@ -86,19 +89,28 @@ public class UserConsoleImpl implements UserInterface{
     }
 
     /**
-     * Handle printing text parameter
-     * @param text text to be printed
+     * Handle printing text parameter to console
+     * @param message text to be printed
      */
     @Override
-    public void print(String text) {
-        printStream.println(text);
+    public void displayMessage(String message) {
+        printStream.println(message);
+    }
+
+    @Override
+    public void displaySendersStats(List<StatsDTO> sendersStats) {
+        displayMessage("Top Sender Stats:\n" + sendersStats.toString());
+    }
+
+    @Override
+    public void displayCountryStats(List<StatsDTO> countryStats) {
+        displayMessage("Country Stats:\n" + countryStats.toString());
     }
 
     /**
      * Provide System.out object as alternative for printing message
      * @return System.out
      */
-    @Override
     public PrintStream getPrintStream() {
         return printStream;
     }

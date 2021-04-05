@@ -1,10 +1,11 @@
 package mitto.sms.userinterface;
 
+import mitto.sms.hibernate.StatsDTO;
 import mitto.sms.userinterface.command.UserCommandsHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.util.List;
 
 /**
  * Common User Interface
@@ -38,16 +39,7 @@ public interface UserInterface {
      */
     void stop();
 
-    /**
-     * Handle printing text parameter
-     * @param text text to be printed
-     */
-    void print(String text);
-
-    /**
-     * Provide printStream object as alternative for printing message
-     * @return printStream object
-     */
-    PrintStream getPrintStream();
-
+    void displayMessage(String message);
+    void displaySendersStats(List<StatsDTO> sendersStats);
+    void displayCountryStats(List<StatsDTO> countryStats);
 }

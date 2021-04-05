@@ -1,6 +1,6 @@
 package mitto.sms.service;
 
-import javafx.util.Pair;
+import mitto.sms.hibernate.StatsDTO;
 import mitto.sms.hibernate.entity.CountryFee;
 import mitto.sms.hibernate.entity.SMS;
 import mitto.sms.hibernate.repository.CountryFeeRepository;
@@ -9,11 +9,8 @@ import mitto.sms.hibernate.repository.SmsRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component("smsService")
 public class SmsService implements Service {
@@ -52,47 +49,20 @@ public class SmsService implements Service {
         return smsRepository.create(sms);
     }
 
-    public List<String> getTopSendersFormatted(Integer limit) {
-        List<String> result;
+    @Override
+    public List<StatsDTO> getTopSendersStats(Integer limit) {
+        List<StatsDTO>  result;
         if(isCountryFeeEnabled()) {
-            LinkedHashMap<String, Pair<Long, BigDecimal>> topSendersWithFee = smsRepository.findTopSendersWithFee(limit);
-            result =  topSendersWithFee.entrySet()
-                    .stream()
-                    .map(entry -> outputValuesToString(
-                            entry.getKey(),
-                            longToUnsignedInt(entry.getValue().getKey()),
-                            entry.getValue().getValue().toString()))
-                    .collect(Collectors.toList());
+            result = smsRepository.findTopSendersWithFee(limit);
         } else {
-            LinkedHashMap<String, Long> topSMSSenders = smsRepository.findTopSenders(limit);
-            result = topSMSSenders.entrySet()
-                    .stream()
-                    .map(entry -> outputValuesToString(
-                            entry.getKey(),
-                            longToUnsignedInt(entry.getValue())))
-                    .collect(Collectors.toList());
+            result =  smsRepository.findTopSenders(limit);
         }
         return result;
     }
 
     @Override
-    public List<String> getCountryFeeFormatted() {
-        LinkedHashMap<String, Pair<Long, BigDecimal>> feeCountryStats = smsRepository.getFeeCountryStats();
-        return feeCountryStats.entrySet()
-                .stream()
-                .map(entry -> outputValuesToString(
-                        entry.getKey(),
-                        longToUnsignedInt(entry.getValue().getKey()),
-                        entry.getValue().getValue().toString()))
-                .collect(Collectors.toList());
-    }
-
-    private static String outputValuesToString(String... values){
-        return String.join(" ", values);
-    }
-
-    private static String longToUnsignedInt(Long value) {
-        return Integer.toUnsignedString(value.intValue());
+    public List<StatsDTO> getCountryFeeStats() {
+        return smsRepository.getgetCountryFeeStats();
     }
 
 

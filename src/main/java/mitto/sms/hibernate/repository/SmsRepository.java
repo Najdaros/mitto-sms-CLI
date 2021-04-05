@@ -1,10 +1,8 @@
 package mitto.sms.hibernate.repository;
 
-import javafx.util.Pair;
+import mitto.sms.hibernate.StatsDTO;
 import mitto.sms.hibernate.entity.SMS;
 
-import java.math.BigDecimal;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -16,19 +14,19 @@ public interface SmsRepository extends Repository<SMS>{
      * @param limit limit number of result (ordered from most occurred to less)
      * @return map where key represent sender name and value represent count of messages
      */
-    LinkedHashMap<String, Long> findTopSenders(Integer limit);
+    List<StatsDTO> findTopSenders(Integer limit);
 
     /**
      * Similar to findTopSenders, extended output by overall sum of prices for messages
      * @param limit limit number of result (ordered from most occurred to less)
      * @return map where key represent sender name and value is pair of number of message occurrences and overall sum of prices for messages
      */
-    LinkedHashMap<String, Pair<Long, BigDecimal>> findTopSendersWithFee(Integer limit);
+    List<StatsDTO> findTopSendersWithFee(Integer limit);
     /**
      * Similar to findTopSendersWithFee, working with countryName instead
      * @return map where key represent countryName name and value is pair of number of message occurrences and overall sum of prices for messages
      */
-    LinkedHashMap<String, Pair<Long, BigDecimal>> getFeeCountryStats();
+    List<StatsDTO> getgetCountryFeeStats();
 
     /**
      * Finding all messages filtered by success column

@@ -44,7 +44,7 @@ public class SMSCreateCommandImpl implements Command {
         Optional<SMS> optionalSms = parser.parse(input);
         Boolean saved = optionalSms.map(sms -> service.saveSMS(sms)).orElse(false);
         if (saved) {
-            userInterface.print(optionalSms.get().toString()+" saved");
+            userInterface.displayMessage(optionalSms.get().toString()+" saved");
         }
         return saved;
     }

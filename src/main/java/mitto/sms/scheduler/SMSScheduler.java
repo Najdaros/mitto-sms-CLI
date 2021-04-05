@@ -18,11 +18,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class SMSScheduler {
 
-    private final StatsCommand statsCommand;
+
+    private final Service service;
+    private final UserInterface userInterface;
 
     @Autowired
     public SMSScheduler(Service service, UserInterface userInterface){
-        statsCommand = new StatsCommand(service, userInterface);
+        this.service = service;
+        this.userInterface = userInterface;
     }
 
     /**
@@ -30,7 +33,7 @@ public class SMSScheduler {
      */
     @Scheduled(fixedRate = 60000)
     private void topSMSSenders() {
-        statsCommand.printTopSendersStats();
+        userInterface.displaySendersStats(service.getTopSendersStats(5));
     }
 
 }

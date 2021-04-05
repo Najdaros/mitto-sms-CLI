@@ -44,7 +44,7 @@ public class CountryFeeCreateCommandImpl implements Command{
         Optional<CountryFee> optionalCountryFee = parser.parse(input);
         Boolean saved = optionalCountryFee.map(countryFee -> service.saveCountryFee(countryFee)).orElse(false);
         if (saved) {
-            userInterface.print(optionalCountryFee.get().toString()+" saved");
+            userInterface.displayMessage(optionalCountryFee.get().toString()+" saved");
         }
         return saved;
     }

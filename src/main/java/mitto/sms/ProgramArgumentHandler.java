@@ -98,17 +98,18 @@ public class ProgramArgumentHandler {
             userInterface.setCommandsHandler(defaultCommandsHandler);
             userInterface.run();
         } catch (FileNotFoundException e) {
-            userInterface.print("File not found. Reason: " + e.getMessage()+"\n Program will end...");
+            userInterface.displayMessage("File not found. Reason: " + e.getMessage()+"\n Program will end...");
         } catch (ParseException e) {
-            userInterface.print("Program argument exception. Reason: " + e.getMessage()+"\n Program will end...");
+            userInterface.displayMessage("Program argument exception. Reason: " + e.getMessage()+"\n Program will end...");
         }
     }
     private void printHelp() {
-        String header = "Program arguments description\n\n";
-
-        HelpFormatter formatter = new HelpFormatter();
-        PrintWriter pw = new PrintWriter(userInterface.getPrintStream());
-        formatter.printHelp(pw, formatter.getWidth(), "Program", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
-        pw.flush();
+//        TODO
+//        String header = "Program arguments description\n\n";
+//
+//        HelpFormatter formatter = new HelpFormatter();
+//        PrintWriter pw = new PrintWriter(userInterface.getPrintStream());
+//        formatter.printHelp(pw, formatter.getWidth(), "Program", header, options, formatter.getLeftPadding(), formatter.getDescPadding(), "\n\n", true);
+//        pw.flush();
     }
 }
