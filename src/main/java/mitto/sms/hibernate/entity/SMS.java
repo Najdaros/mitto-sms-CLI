@@ -11,15 +11,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Object/relational SMS mapping
+ */
 @javax.persistence.Entity
 @Data
 @ToString
 @Table(name = "sms")
 public class SMS implements Entity {
+    @ToString.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "country_code_id", referencedColumnName = "country_code_id")
     private CountryFee countryFee;
@@ -27,6 +32,7 @@ public class SMS implements Entity {
     @Column(name = "sender")
     private String sender;
 
+    @ToString.Exclude
     @Column(name = "success")
     private Boolean success;
 

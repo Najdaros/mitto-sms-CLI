@@ -13,6 +13,14 @@ import org.apache.commons.cli.ParseException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * Command for handling stats -[c|s|h] inputs. Command first try validate input and if validation passed command will be executed
+ * stats command arguments:
+ * -c printing statistics for countries <country name><space><count of messages><space><overall sum of prices for messages>
+ * -s printing statistics for top 5 senders <sender><space><count of messages> or
+ *                                          <sender><space><count of messages><space><overall sum of prices for messages>
+ * -h printing help
+ */
 public class StatsCommand implements Command {
     private final StatsCommandValidator statsCommandValidator;
     private Service service;
@@ -49,14 +57,12 @@ public class StatsCommand implements Command {
                 }
                 if (cmd.hasOption("s")) {
 
-                    String countryFeeStats = String.join("\n", service.getTopSendersFormatted(5));
-                    userInterface.print("Top Sender Stats:\n" + countryFeeStats + "\n");
+                    printTopSendersStats();
                     return true;
                 }
                 if (cmd.hasOption("c") || isEmptyCommandArgumentList(cmd.getArgList())) {
 
-                    String countryFeeStats = String.join("\n", service.getCountryFeeFormatted());
-                    userInterface.print("Country Fee Stats:\n" + countryFeeStats + "\n");
+                    printCountryStats();
                     return true;
                 }
             }
@@ -65,6 +71,16 @@ public class StatsCommand implements Command {
             e.printStackTrace(userInterface.getPrintStream());
         }
         return false;
+    }
+
+    public void printTopSendersStats() {
+        String countryFeeStats = String.join("\n", service.getTopSendersFormatted(5));
+        userInterface.print("Top Sender Stats:\n" + countryFeeStats + "\n");
+    }
+
+    private void printCountryStats() {
+        String countryFeeStats = String.join("\n", service.getCountryFeeFormatted());
+        userInterface.print("Country Fee Stats:\n" + countryFeeStats + "\n");
     }
 
     private static boolean isEmptyCommandArgumentList(List<String> argList) {

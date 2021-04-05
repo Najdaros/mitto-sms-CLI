@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
+/**
+ * Program Main class
+ */
 public class SmsCliApp implements CommandLineRunner{
 
     @Autowired

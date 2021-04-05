@@ -11,17 +11,21 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 
 @Component("SMSParser")
+
 public class SMSParserImpl implements Parser<SMS> {
-
-
     private final SenderValidator senderValidator = new SenderValidator();
     private final MSISDNValidator recipientValidator = new MSISDNValidator();
     private final MessageTextValidator messageTextValidator = new MessageTextValidator();
     private final StringTokenizerFactory tokenizerFactory = new StringTokenizerFactory();
 
-    public SMSParserImpl() {
-    }
-
+    /**
+     * Tries to parse value and produce Optinal<SMS> object
+     * accepted format <sender: alphanumeric, MSISDN><space><recipient: MSISDN format><text: alphanumeric (one word message doesn’t have to be
+     *  * in quotes), max 256 characters>
+     * @param value string value for parsing
+     * @return Optional<SMS> if parsing finish successfully, otherwise ParsingException is thrown
+     * @throws ParsingException thrown when validation fails during parsing, exception message will holds detailed information
+     */
     public Optional<SMS> parse(String value) throws ParsingException {
         SMS sms = new SMS();
 

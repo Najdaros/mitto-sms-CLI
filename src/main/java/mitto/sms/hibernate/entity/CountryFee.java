@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
+/**
+ * Object/relational CountryFee mapping
+ */
 @javax.persistence.Entity
 @Data
 @ToString
@@ -26,12 +29,6 @@ public class CountryFee implements Entity {
     private BigDecimal price;
 
     public CountryFee() {
-    }
-
-    public CountryFee(Integer countryCode, String countryName, BigDecimal price) {
-        this.countryCode = countryCode;
-        this.countryName = countryName;
-        this.price = price;
     }
 
 }

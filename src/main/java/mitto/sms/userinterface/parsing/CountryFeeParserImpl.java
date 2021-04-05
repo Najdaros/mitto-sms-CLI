@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 
 @Component("CountryFeeParser")
+
 public class CountryFeeParserImpl implements Parser<CountryFee>{
 
     private final CountryCodeValidator countryCodeValidator = new CountryCodeValidator();
@@ -19,6 +20,13 @@ public class CountryFeeParserImpl implements Parser<CountryFee>{
     private final BigDecimalValidator priceValidator = new BigDecimalValidator(3);
     private final StringTokenizerFactory tokenizerFactory = new StringTokenizerFactory();
 
+    /**
+     * Tries to parse value and produce Optinal<CountryFee> object
+     * accepted format <country code: max 3 digits><space><country name: varchar><price: unsigned integer, fixed 3 decimals, . (dot) as decimal separator>
+     * @param value string value for parsing
+     * @return Optional<SMS> if parsing finish successfully, otherwise ParsingException is thrown
+     * @throws ParsingException thrown when validation fails during parsing, exception message will holds detailed information
+     */
     public Optional<CountryFee> parse(String value) throws ParsingException {
         CountryFee countryFee = new CountryFee();
 

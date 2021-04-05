@@ -11,6 +11,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * Repository implementation providing common operations – CRUD, and sorting for CountryFee entities
+ */
 @org.springframework.stereotype.Repository
 @Transactional
 public class CountryFeeRepositoryImpl implements CountryFeeRepository {
@@ -18,18 +21,24 @@ public class CountryFeeRepositoryImpl implements CountryFeeRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public CountryFeeRepositoryImpl() {
-    }
-
+    /**
+     * Persists countryFee entity
+     * @param countryFee entity to persis
+     * @return true if entity is persisted
+     */
     @Override
-    public boolean create(CountryFee sms) {
-        if (find(sms.getCountryCode()) == null) {
-            entityManager.persist(sms);
+    public boolean create(CountryFee countryFee) {
+        if (find(countryFee.getCountryCode()) == null) {
+            entityManager.persist(countryFee);
             return true;
         }
         return false;
     }
 
+    /**
+     * Finding all entities
+     * @return list of entities
+     */
     @Override
     public List<CountryFee> findAll() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -40,6 +49,11 @@ public class CountryFeeRepositoryImpl implements CountryFeeRepository {
         return allQuery.getResultList();
     }
 
+    /**
+     * Finding entity for given id
+     * @param id id of entity we are searching
+     * @return found entity or null
+     */
     @Override
     public CountryFee find(Integer id) {
         return entityManager.find(CountryFee.class, id);

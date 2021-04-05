@@ -17,7 +17,7 @@ public class BigDecimalValidator implements Validator<String> {
             return false;
         try {
             BigDecimal bigDecimalValue = new BigDecimal(value);
-            return bigDecimalValue.scale() == scale;
+            return bigDecimalValue.signum() > 0 && bigDecimalValue.scale() == scale;
 
         } catch (NumberFormatException ignored) {
             return false;
@@ -26,6 +26,6 @@ public class BigDecimalValidator implements Validator<String> {
 
     @Override
     public String formatDesc() {
-        return "fixed 3 decimals, . (dot) as decimal separator";
+        return "unsigned integer, fixed 3 decimals, . (dot) as decimal separator";
     }
 }

@@ -9,7 +9,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * The SMSScheduler class handling asynchronous task execution for printing top SMS senders in regular intervals (1 minute)
+ * @author Jan Sorad
+ */
 @EnableAsync
 @EnableScheduling
 @Component
@@ -22,9 +25,12 @@ public class SMSScheduler {
         statsCommand = new StatsCommand(service, userInterface);
     }
 
+    /**
+     * printing top senders statistics information
+     */
     @Scheduled(fixedRate = 60000)
     private void topSMSSenders() {
-        statsCommand.processCommand("stats -s");
+        statsCommand.printTopSendersStats();
     }
 
 }

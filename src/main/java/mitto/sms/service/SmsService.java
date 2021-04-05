@@ -28,8 +28,7 @@ public class SmsService implements Service {
         this.countryFeeRepository = countryFeeRepository;
     }
 
-    @Override
-    public boolean isCountryFeeEnabled() {
+    private boolean isCountryFeeEnabled() {
         return countryFeeEnabled;
     }
 
