@@ -80,20 +80,12 @@ public class SmsCli {
 
             if (cmd.hasOption("f")) {
                 String filename = cmd.getOptionValue("f");
-                service.setCountryFeeEnabled(true);
-                UserCommandsHandler countryFeeFileCommandsHandler = new UserCommandsHandler();
-                countryFeeFileCommandsHandler.setFreeFormatCommand(new CountryFeeCreateCommandImpl(service, userInterface));
-                userInterface.setCommandsHandler(countryFeeFileCommandsHandler);
-                userInterface.run(new File(filename));
+                handleCountryFeeFile(filename, service, userInterface);
                 defaultCommandsHandler.addStrictFormatCommand(new StatsCommand(service, userInterface));
             }
-
             if (cmd.hasOption("s")) {
                 String filename = cmd.getOptionValue("s");
-                UserCommandsHandler smsFileCommandsHandler = new UserCommandsHandler();
-                smsFileCommandsHandler.setFreeFormatCommand(smsCreateCommand);
-                userInterface.setCommandsHandler(smsFileCommandsHandler);
-                userInterface.run(new File(filename));
+                handleSMSFile(filename, userInterface, smsCreateCommand);
             }
 
             userInterface.setCommandsHandler(defaultCommandsHandler);
@@ -104,6 +96,22 @@ public class SmsCli {
             userInterface.displayMessage("Program argument exception. Reason: " + e.getMessage()+"\n Program will end...");
         }
     }
+
+    private void handleSMSFile(String filename, UserInterface userInterface, SMSCreateCommandImpl smsCreateCommand) throws FileNotFoundException {
+        UserCommandsHandler smsFileCommandsHandler = new UserCommandsHandler();
+        smsFileCommandsHandler.setFreeFormatCommand(smsCreateCommand);
+        userInterface.setCommandsHandler(smsFileCommandsHandler);
+        userInterface.run(new File(filename));
+    }
+
+    private void handleCountryFeeFile(String filename, Service service, UserInterface userInterface) throws FileNotFoundException {
+        service.setCountryFeeEnabled(true);
+        UserCommandsHandler countryFeeFileCommandsHandler = new UserCommandsHandler();
+        countryFeeFileCommandsHandler.setFreeFormatCommand(new CountryFeeCreateCommandImpl(service, userInterface));
+        userInterface.setCommandsHandler(countryFeeFileCommandsHandler);
+        userInterface.run(new File(filename));
+    }
+
     private void printHelp() {
         String header = "Program arguments description\n\n";
         HelpFormatter formatter = new HelpFormatter();

@@ -1,6 +1,6 @@
 package mitto.sms.userinterface;
 
-import mitto.sms.hibernate.StatsDTO;
+import mitto.sms.hibernate.dao.StatsDTO;
 import mitto.sms.userinterface.command.UserCommandsHandler;
 
 import java.io.File;

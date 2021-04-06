@@ -1,6 +1,6 @@
 package mitto.sms.userinterface.consoleinterface;
 
-import mitto.sms.hibernate.StatsDTO;
+import mitto.sms.hibernate.dao.StatsDTO;
 import mitto.sms.userinterface.UserInterface;
 import mitto.sms.userinterface.parsing.exception.ParsingException;
 import mitto.sms.userinterface.command.UserCommandsHandler;
@@ -100,12 +100,12 @@ public class UserConsole implements UserInterface{
 
     @Override
     public void displaySendersStats(List<StatsDTO> sendersStats) {
-        displayMessage("Top Sender Stats:\n" + sendersStats.stream().map(StatsDTO::toString).collect(Collectors.joining(" ")));
+        displayMessage("Top Sender Stats:\n" + sendersStats.stream().map(StatsDTO::toString).collect(Collectors.joining("\n")));
     }
 
     @Override
     public void displayCountryStats(List<StatsDTO> countryStats) {
-        displayMessage("Top Sender Stats:\n" + countryStats.stream().map(StatsDTO::toString).collect(Collectors.joining(" ")));
+        displayMessage("Top Sender Stats:\n" + countryStats.stream().map(StatsDTO::toString).collect(Collectors.joining("\n")));
         displayMessage("Country Stats:\n" + countryStats.toString());
     }
 

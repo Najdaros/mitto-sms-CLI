@@ -1,7 +1,8 @@
 package mitto.sms.service;
 
-import mitto.sms.hibernate.StatsDTO;
+import mitto.sms.hibernate.dao.StatsDTO;
 import mitto.sms.hibernate.entity.CountryFee;
+import mitto.sms.hibernate.entity.Entity;
 import mitto.sms.hibernate.entity.SMS;
 import mitto.sms.hibernate.repository.CountryFeeRepository;
 import mitto.sms.hibernate.repository.SmsRepository;
@@ -34,14 +35,21 @@ public class SmsService implements Service {
         countryFeeEnabled = enabled;
     }
 
-
     @Override
-    public boolean saveCountryFee(CountryFee countryFee) {
+    public boolean saveEntity(Entity entity) {
+        if( entity instanceof CountryFee) {
+            return saveCountryFee((CountryFee) entity);
+        } else if (entity instanceof SMS) {
+            return saveSMS((SMS) entity);
+        }
+        return false;
+    }
+
+    private boolean saveCountryFee(CountryFee countryFee) {
         return countryFeeRepository.create(countryFee);
     }
 
-    @Override
-    public boolean saveSMS(SMS sms) {
+    private boolean saveSMS(SMS sms) {
         Optional<CountryFee> countryFeeReference = countryFeeRepository.findAll().stream()
                 .filter(countryFee -> sms.getRecipient().startsWith(countryFee.getCountryCode().toString())).findFirst();
         countryFeeReference.ifPresent(sms::setCountryFee);

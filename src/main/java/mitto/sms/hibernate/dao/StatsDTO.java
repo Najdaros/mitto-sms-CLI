@@ -1,12 +1,12 @@
-package mitto.sms.hibernate;
+package mitto.sms.hibernate.dao;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 public class StatsDTO {
     private final String statsName;
-    private final Long occurency;
-    private final Optional<BigDecimal> optionalTotalPrice;
+    private final Long occurrence;
+    private final BigDecimal totalPrice;
 
     public StatsDTO(String statsName, Long occurrence) {
         this(statsName, occurrence, null);
@@ -14,14 +14,15 @@ public class StatsDTO {
 
     public StatsDTO(String statsName, Long occurrence, BigDecimal totalPrice) {
         this.statsName = statsName;
-        this.occurency = occurrence;
-        this.optionalTotalPrice = Optional.ofNullable(totalPrice);
+        this.occurrence = occurrence;
+        this.totalPrice = totalPrice;
     }
 
     @Override
     public String toString() {
         StringBuilder statsBuilder = new StringBuilder();
-        statsBuilder.append(statsName).append(" ").append(occurency);
+        statsBuilder.append(statsName).append(" ").append(occurrence);
+        Optional<BigDecimal> optionalTotalPrice = Optional.ofNullable(this.totalPrice);
         optionalTotalPrice.ifPresent(bigDecimal -> statsBuilder.append(" ").append(bigDecimal.toString()));
         return statsBuilder.toString();
     }

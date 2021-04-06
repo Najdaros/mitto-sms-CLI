@@ -1,6 +1,6 @@
 package mitto.sms.hibernate.repository;
 
-import mitto.sms.hibernate.StatsDTO;
+import mitto.sms.hibernate.dao.StatsDTO;
 import mitto.sms.hibernate.entity.SMS;
 
 import java.util.List;
