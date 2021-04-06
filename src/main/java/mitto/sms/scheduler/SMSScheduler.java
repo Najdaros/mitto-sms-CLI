@@ -1,7 +1,6 @@
 package mitto.sms.scheduler;
 
-import mitto.sms.userinterface.command.StatsCommand;
-import mitto.sms.service.Service;
+import mitto.sms.service.SmsService;
 import mitto.sms.userinterface.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -19,12 +18,12 @@ import org.springframework.stereotype.Component;
 public class SMSScheduler {
 
 
-    private final Service service;
+    private final SmsService smsService;
     private final UserInterface userInterface;
 
     @Autowired
-    public SMSScheduler(Service service, UserInterface userInterface){
-        this.service = service;
+    public SMSScheduler(SmsService smsService, UserInterface userInterface){
+        this.smsService = smsService;
         this.userInterface = userInterface;
     }
 
@@ -33,7 +32,7 @@ public class SMSScheduler {
      */
     @Scheduled(fixedRate = 60000)
     private void topSMSSenders() {
-        userInterface.displaySendersStats(service.getTopSendersStats(5));
+        userInterface.displaySendersStats(smsService.getTopSendersStats(10));
     }
 
 }

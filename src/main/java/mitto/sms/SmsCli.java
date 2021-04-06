@@ -1,6 +1,6 @@
 package mitto.sms;
 
-import mitto.sms.service.Service;
+import mitto.sms.service.SmsService;
 import mitto.sms.userinterface.command.CountryFeeCreateCommandImpl;
 import mitto.sms.userinterface.command.QuitCommand;
 import mitto.sms.userinterface.command.SMSCreateCommandImpl;
@@ -24,9 +24,9 @@ import java.io.StringWriter;
 
 @Component("programArgumentHandler")
 /**
- * The SmsCli class provides base operation to initialise UserInterface and main Service
+ * The SmsCli class provides base operation to initialise UserInterface and main SmsService
  * for handling user inputs via registered Commands
- * UserInterface and Service Configuration is set by input programArguments
+ * UserInterface and SmsService Configuration is set by input programArguments
  * supported program line arguments:
  * -h --help                prints help
  * -f --fee_file [filepath] load and process country_fee file
@@ -40,17 +40,17 @@ public class SmsCli {
     private CommandLineParser parser;
     private Options options;
     private final UserInterface userInterface;
-    private final Service service;
+    private final SmsService smsService;
 
     /**
      * SmsCli Constructor
-     * autowiring object implementation of UserInterface and Service by value parameters
+     * autowiring object implementation of UserInterface and SmsService by value parameters
      */
     @Autowired
-    public SmsCli(@Value("#{userConsole}") UserInterface userInterface, @Value("#{smsService}")Service service) {
+    public SmsCli(@Value("#{userConsole}") UserInterface userInterface, @Value("#{smsService}") SmsService smsService) {
         initArgumentParser();
         this.userInterface = userInterface;
-        this.service = service;
+        this.smsService = smsService;
     }
 
     private void initArgumentParser() {
@@ -62,14 +62,14 @@ public class SmsCli {
     }
 
     /**
-     * Method handles provided program line arguments, configures Service and runs UserInterface accordingly
+     * Method handles provided program line arguments, configures SmsService and runs UserInterface accordingly
      * @param args program line arguments
      */
     void handle(String[] args) {
         try {
             CommandLine cmd = parser.parse(options, args);
             UserCommandsHandler defaultCommandsHandler = new UserCommandsHandler();
-            SMSCreateCommandImpl smsCreateCommand = new SMSCreateCommandImpl(service, userInterface);
+            SMSCreateCommandImpl smsCreateCommand = new SMSCreateCommandImpl(smsService, userInterface);
             defaultCommandsHandler.setFreeFormatCommand(smsCreateCommand);
             defaultCommandsHandler.addStrictFormatCommand(new QuitCommand(userInterface));
 
@@ -80,8 +80,8 @@ public class SmsCli {
 
             if (cmd.hasOption("f")) {
                 String filename = cmd.getOptionValue("f");
-                handleCountryFeeFile(filename, service, userInterface);
-                defaultCommandsHandler.addStrictFormatCommand(new StatsCommand(service, userInterface));
+                handleCountryFeeFile(filename, smsService, userInterface);
+                defaultCommandsHandler.addStrictFormatCommand(new StatsCommand(smsService, userInterface));
             }
             if (cmd.hasOption("s")) {
                 String filename = cmd.getOptionValue("s");
@@ -101,15 +101,16 @@ public class SmsCli {
         UserCommandsHandler smsFileCommandsHandler = new UserCommandsHandler();
         smsFileCommandsHandler.setFreeFormatCommand(smsCreateCommand);
         userInterface.setCommandsHandler(smsFileCommandsHandler);
-        userInterface.run(new File(filename));
+        FileEntityProcessor.process(filename, userInterface, smsCreateCommand);
     }
 
-    private void handleCountryFeeFile(String filename, Service service, UserInterface userInterface) throws FileNotFoundException {
-        service.setCountryFeeEnabled(true);
+    private void handleCountryFeeFile(String filename, SmsService smsService, UserInterface userInterface) throws FileNotFoundException {
+        smsService.setCountryFeeEnabled(true);
         UserCommandsHandler countryFeeFileCommandsHandler = new UserCommandsHandler();
-        countryFeeFileCommandsHandler.setFreeFormatCommand(new CountryFeeCreateCommandImpl(service, userInterface));
+        CountryFeeCreateCommandImpl countryFeeCreateCommand = new CountryFeeCreateCommandImpl(smsService, userInterface);
+        countryFeeFileCommandsHandler.setFreeFormatCommand(countryFeeCreateCommand);
         userInterface.setCommandsHandler(countryFeeFileCommandsHandler);
-        userInterface.run(new File(filename));
+        FileEntityProcessor.process(filename, userInterface, countryFeeCreateCommand);
     }
 
     private void printHelp() {

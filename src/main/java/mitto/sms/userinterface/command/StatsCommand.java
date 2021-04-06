@@ -1,7 +1,7 @@
 package mitto.sms.userinterface.command;
 
 import mitto.sms.userinterface.validation.StatsCommandValidator;
-import mitto.sms.service.Service;
+import mitto.sms.service.SmsService;
 import mitto.sms.userinterface.UserInterface;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -24,13 +24,13 @@ import java.util.List;
  */
 public class StatsCommand implements Command {
     private final StatsCommandValidator statsCommandValidator;
-    private Service service;
+    private SmsService smsService;
     private UserInterface userInterface;
     private CommandLineParser parser;
     private Options options;
 
-    public StatsCommand(Service service, UserInterface userInterface) {
-        this.service = service;
+    public StatsCommand(SmsService smsService, UserInterface userInterface) {
+        this.smsService = smsService;
         this.userInterface = userInterface;
         statsCommandValidator = new StatsCommandValidator();
         parser = new DefaultParser();
@@ -59,12 +59,12 @@ public class StatsCommand implements Command {
                 }
                 if (cmd.hasOption("s")) {
 
-                    userInterface.displaySendersStats( service.getTopSendersStats(5));
+                    userInterface.displaySendersStats( smsService.getTopSendersStats(10));
                     return true;
                 }
                 if (cmd.hasOption("c") || isEmptyCommandArgumentList(cmd.getArgList())) {
 
-                    userInterface.displayCountryStats(service.getCountryFeeStats());
+                    userInterface.displayCountryStats(smsService.getCountryFeeStats());
                     return true;
                 }
             }

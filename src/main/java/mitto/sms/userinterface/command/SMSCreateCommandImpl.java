@@ -2,7 +2,7 @@ package mitto.sms.userinterface.command;
 
 import mitto.sms.userinterface.parsing.SMSParserImpl;
 import mitto.sms.hibernate.entity.SMS;
-import mitto.sms.service.Service;
+import mitto.sms.service.SmsService;
 import mitto.sms.userinterface.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,11 +16,11 @@ import org.springframework.stereotype.Component;
 public class SMSCreateCommandImpl extends AbstractEntityCreateCommandImpl<SMS> {
     /**
      * SMSCreateCommandImpl constructor
-     * @param service {@link Service}
+     * @param smsService {@link SmsService}
      * @param userInterface {@link UserInterface}
      */
     @Autowired
-    public SMSCreateCommandImpl(Service service, UserInterface userInterface){
-        super(service, userInterface, new SMSParserImpl());
+    public SMSCreateCommandImpl(SmsService smsService, UserInterface userInterface){
+        super(smsService, userInterface, new SMSParserImpl());
     }
 }

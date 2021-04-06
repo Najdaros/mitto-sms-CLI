@@ -23,7 +23,7 @@ public class QuitCommand implements Command{
     public boolean processCommand(String input) {
         if (QUIT.equals(input.trim())){
             userInterface.displayMessage("User interface shutting down by quit command...");
-            userInterface.stop();
+            userInterface.quit();
             return true;
         }
         return false;

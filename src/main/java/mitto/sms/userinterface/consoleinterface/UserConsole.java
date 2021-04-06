@@ -43,16 +43,6 @@ public class UserConsole implements UserInterface{
         run(new Scanner(inputStream));
     }
 
-    /**
-     * Starts file input processing
-     * @param file input file contains formatted lines
-     * @throws FileNotFoundException exception thrown when no such file exists
-     */
-    public void run(File file) throws FileNotFoundException {
-        displayMessage("Processing file... "+file.getName());
-        run(new Scanner(file));
-    }
-
     private void run(Scanner scanner) {
         try {
             running = true;
@@ -85,7 +75,7 @@ public class UserConsole implements UserInterface{
      * Will stop currently running input processing (file or user)
      */
     @Override
-    public void stop() {
+    public void quit() {
         running = Boolean.FALSE;
     }
 

@@ -21,13 +21,6 @@ public interface UserInterface {
     void run();
 
     /**
-     * Start input processing from file
-     * @param file input file contains formatted lines
-     * @throws FileNotFoundException exception is thrown when File is not found
-     */
-    void run(File file) throws FileNotFoundException;
-
-    /**
      * Allows inject specific user commands handler to provides different operations for various type of inputs
      * @see UserCommandsHandler
      * @param commandsHandler command handler for user inputs
@@ -37,7 +30,7 @@ public interface UserInterface {
     /**
      * Will stop currently running input processing (file or user)
      */
-    void stop();
+    void quit();
 
     void displayMessage(String message);
     void displaySendersStats(List<StatsDTO> sendersStats);
