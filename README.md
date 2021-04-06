@@ -9,7 +9,7 @@ java 8, Spring-boot, maven, hibernate, sqlite
 Program is using file-based DB and remembers all previous stored records (SMSs and Country Fees).  
 
 DB schema:
-[![Home](documents/images/db diagram.png)](db diagram.png)
+[!(documents/images/db diagram.png)](db diagram.png)
 
 `LIMITATION 1`
 In case of SMS records there is no reason for checking duplicates records, but in case of Country Fees
