@@ -10,7 +10,7 @@ Program is using file-based DB and remembers all previous stored records (SMSs a
 
 DB schema:
 
-![db_schema](documents/images/db diagram.png)
+![db_diagram](documents/images/db_diagram.png)
 
 `LIMITATION 1`
 In case of SMS records there is no reason for checking duplicates records, but in case of Country Fees
