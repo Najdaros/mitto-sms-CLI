@@ -24,7 +24,7 @@ public class UserCommandsHandler {
 
     /**
      * Setting command for more variable types of inputs (e.g. SMS or CountryFee formatted inputs)
-     * @param freeFormatCommand
+     * @param freeFormatCommand default input handler command for more variable inputs
      */
     public void setFreeFormatCommand(Command freeFormatCommand) {
         this.freeFormatCommand = freeFormatCommand;

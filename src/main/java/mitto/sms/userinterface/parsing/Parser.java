@@ -12,9 +12,9 @@ import java.util.Optional;
 public interface Parser<T extends Entity> {
 
     /**
-     * Parses string value and converting it to Optinal<Entity> object
+     * Parses string value and converting it to Optional of Entity object
      * @param value string value for parsing
-     * @return Optinal<Entity> object if parsing finish successfully, otherwise ParsingException is thrown
+     * @return Optional od Entity object if parsing finish successfully, otherwise ParsingException is thrown
      * @throws ParsingException thrown when something fails during parsing, exception message will holds detailed information
      */
     Optional<T> parse(String value) throws ParsingException;

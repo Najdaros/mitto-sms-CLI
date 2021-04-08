@@ -50,6 +50,10 @@ mvn test
 Implemented only few unit tests for basic validation inputs and processing data. 
 
 
+## Documentation 
+
+- [JavaDoc](documents/java-doc/index.html)
+
 ## Intro
 
 Program is using file-based DB and remembers all previous stored records (SMSs and Country Fees).  

@@ -42,8 +42,9 @@ public class SmsCli {
     private final SmsService smsService;
 
     /**
-     * SmsCli Constructor
-     * autowiring object implementation of UserInterface and SmsService by value parameters
+     * SmsCli Constructor autowiring object implementation of UserInterface and SmsService by value parameters
+     * @param userInterface userInterface frontend manager
+     * @param smsService sms backend service
      */
     @Autowired
     public SmsCli(@Value("#{userConsole}") UserInterface userInterface, @Value("#{smsService}") SmsService smsService) {

@@ -2,7 +2,7 @@ package mitto.sms.userinterface.validation;
 
 /**
  * Objects The Validator class serve to va
- * @param <T>
+ * @param <T> class type extending String
  */
 public interface Validator<T extends String> {
 

@@ -51,7 +51,7 @@ public class SmsServiceImpl implements SmsService {
     /**
      * Handle persisting entity
      * @param entity entity to store
-     * @return
+     * @return true if entity is saved, false otherwise
      */
     @Override
     public boolean saveEntity(Entity entity) {

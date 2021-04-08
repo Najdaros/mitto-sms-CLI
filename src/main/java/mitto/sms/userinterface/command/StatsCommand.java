@@ -17,9 +17,9 @@ import java.util.List;
 /**
  * Command for handling stats -[c|s|h] inputs. Command first try validate input and if validation passed command will be executed
  * stats command arguments:
- * -c printing statistics for countries <country name><space><count of messages><space><overall sum of prices for messages>
- * -s printing statistics for top 5 senders <sender><space><count of messages> or
- *                                          <sender><space><count of messages><space><overall sum of prices for messages>
+ * -c printing statistics for countries [country name][space][count of messages][space][overall sum of prices for messages]
+ * -s printing statistics for top 5 senders [sender][space][count of messages] or
+ *                                          [sender][space][count of messages][space][overall sum of prices for messages]
  * -h printing help
  */
 public class StatsCommand implements Command {

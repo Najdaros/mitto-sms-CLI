@@ -19,8 +19,9 @@ public class AbstractEntityCreateCommandImpl<T extends Entity> implements Entity
 
     /**
      * AbstractEntityCreateCommandImpl constructor
-     * @param smsService {@link SmsService}
-     * @param userInterface {@link UserInterface}
+     * @param smsService {@link SmsService} service for handling data operation
+     * @param userInterface {@link UserInterface} interface for displaying messages
+     * @param parser provides string to entity conversion
      */
     public AbstractEntityCreateCommandImpl(SmsService smsService, UserInterface userInterface, Parser<T> parser){
         this.smsService = smsService;

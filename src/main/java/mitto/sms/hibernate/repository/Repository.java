@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Objects implements Repository interface allow us to do common operations – CRUD, and sorting
- * @param <T>
+ * @param <T> generic type
  */
 public interface Repository<T> {
 
