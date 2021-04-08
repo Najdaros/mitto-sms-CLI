@@ -52,7 +52,7 @@ Implemented only few unit tests for basic validation inputs and processing data.
 
 ## Documentation 
 
-- [JavaDoc](documents/java-doc/index.html)
+- [JavaDoc.zip](documents/java-doc.zip)
 
 ## Intro
 
