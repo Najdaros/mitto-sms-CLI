@@ -19,7 +19,7 @@ For building and running the application you need:
 
 ## How to run
 
-Run this command from the source code:
+For starting application run this command from the source code:
 
 ```
 mvn spring-boot:run -Dspring-boot.run.arguments="-m sms_file -f country_fee_file"
@@ -35,6 +35,12 @@ Run parameters:
 
     * `-h` - starts program and prints help 
 
+
+For starting tests:
+
+```
+mvn test
+```
 
 ## Intro
 Program is using file-based DB and remembers all previous stored records (SMSs and Country Fees).  

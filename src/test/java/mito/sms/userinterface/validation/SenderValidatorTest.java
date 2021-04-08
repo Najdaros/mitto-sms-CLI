@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class SenderValidatorTest extends AbstractValidatorTest<String> {
 
-    private static final Integer LIMIT = 30;
+    private static final Integer LIMIT = 256;
 
     SenderValidatorTest() {
         super(new SenderValidator());
