@@ -1,6 +1,7 @@
 # mitto.sms-CLI
-Command line program that keeps a record of processed SMS messages
-And can calculate and produce simple data views 
+
+Command line program that keeps a record of processed SMS messages.
+Program provides calculation of simple data views0 
 * Top 10 senders stats
 * Country fee stats (only in case user specify pricing information via `-f file` option)
 
@@ -12,10 +13,12 @@ For building and running the application you need:
 - [Maven 3](https://maven.apache.org)
 
 ## Used technologies and frameworks
+
 - [Spring-boot 2.4.4](https://spring.io/projects/spring-boot)
 - [Hibernate 5.4.30.Final](https://hibernate.org/)
 - [Sqlite 3.34.0](https://www.sqlite.org/index.html)
 - [Project lombok 1.18.20](https://projectlombok.org/)
+- [JUnit 5](https://junit.org/junit5/)
 
 ## How to run
 
@@ -42,7 +45,13 @@ For starting tests:
 mvn test
 ```
 
+## Testing
+
+Implemented only few unit tests for basic validation inputs and processing data. 
+
+
 ## Intro
+
 Program is using file-based DB and remembers all previous stored records (SMSs and Country Fees).  
 
 DB schema:
