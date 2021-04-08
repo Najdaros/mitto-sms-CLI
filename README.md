@@ -1,4 +1,4 @@
-# mitto.sms-CLI
+# Sms-CLI
 
 Command line program that keeps a record of processed SMS messages.
 Program provides calculation of simple data views0 
