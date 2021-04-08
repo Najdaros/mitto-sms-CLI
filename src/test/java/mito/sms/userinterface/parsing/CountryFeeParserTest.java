@@ -1,4 +1,4 @@
-package mito.sms.userinterface.parsering;
+package mito.sms.userinterface.parsing;
 
 import mitto.sms.hibernate.entity.CountryFee;
 import mitto.sms.userinterface.parsing.CountryFeeParserImpl;
