@@ -25,7 +25,7 @@ For building and running the application you need:
 For starting application run this command from the source code:
 
 ```
-mvn spring-boot:run -Dspring-boot.run.arguments="-m sms_file -f country_fee_file"
+mvn spring-boot:run -Dspring-boot.run.arguments="-s sms_file -f country_fee_file"
 ```
 
 Run parameters:
