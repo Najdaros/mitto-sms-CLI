@@ -67,10 +67,11 @@ public class StatsCommand implements Command {
                     userInterface.displayCountryStats(smsService.getCountryFeeStats());
                     return true;
                 }
+
             }
         } catch (ParseException e) {
-            userInterface.displayMessage("Stats command parsing exception: "+e.getMessage());
-//            e.printStackTrace(userInterface.getPrintStream());
+            userInterface.displayMessage(e.getMessage() + " (use -h for help)");
+            return true;
         }
         return false;
     }

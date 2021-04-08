@@ -14,7 +14,7 @@ public class CountryCodeValidator implements Validator<String> {
             return false;
         try {
             Integer intValue = Integer.valueOf(value);
-            return intValue >= 1 && intValue <= (int) Math.pow(10, digits);
+            return intValue >= 1 && intValue < (int) Math.pow(10, digits);
 
         } catch (NumberFormatException ignored) {
             return false;

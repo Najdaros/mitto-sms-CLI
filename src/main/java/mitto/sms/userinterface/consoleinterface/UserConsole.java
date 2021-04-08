@@ -6,8 +6,6 @@ import mitto.sms.userinterface.parsing.exception.ParsingException;
 import mitto.sms.userinterface.command.UserCommandsHandler;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;

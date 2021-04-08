@@ -64,7 +64,7 @@ Allowed commands are:
 * **quit** - terminate program 
 * **\<recipient\>\<space\>\<recipient\>\<space\><text message\>** - sms formatted record for persist
 * **stats** **\[-option\]** - stats command works only if program got file containing country fee records in command line option `-f`
-    * **-s** print top 5 ordered senders stats \<sender\>\<space\>\<sms count\>\<space\>\<total cost\>
+    * **-s** print top 10 ordered senders stats \<sender\>\<space\>\<sms count\>\<space\>\<total cost\>
     * **-c** print all ordered country fee stats \<country name\>\<space\>\<sms count\>\<space\>\<total cost\>
     * empty - same as `-c` option
     

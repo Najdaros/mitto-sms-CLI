@@ -1,10 +1,10 @@
 package mitto.sms.userinterface.parsing;
 
 import mitto.sms.userinterface.parsing.exception.ParsingException;
-import mitto.sms.userinterface.validation.AlphanumericValidator;
 import mitto.sms.userinterface.validation.BigDecimalValidator;
 import mitto.sms.userinterface.validation.CountryCodeValidator;
 import mitto.sms.hibernate.entity.CountryFee;
+import mitto.sms.userinterface.validation.VarcharValidator;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 public class CountryFeeParserImpl implements Parser<CountryFee>{
 
     private final CountryCodeValidator countryCodeValidator = new CountryCodeValidator();
-    private final AlphanumericValidator countryNameValidator = new AlphanumericValidator(256);
+    private final VarcharValidator countryNameValidator = new VarcharValidator(256);
     private final BigDecimalValidator priceValidator = new BigDecimalValidator(3);
     private final StringTokenizerFactory tokenizerFactory = new StringTokenizerFactory();
 

@@ -7,7 +7,6 @@ import mitto.sms.userinterface.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 /**
  * Command for handling inputs in sms format
  * @see SMSParserImpl

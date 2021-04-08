@@ -1,6 +1,5 @@
 package mitto.sms.userinterface.validation;
 
-
 import java.util.regex.Pattern;
 
 public class MSISDNValidator extends PatternValidator {

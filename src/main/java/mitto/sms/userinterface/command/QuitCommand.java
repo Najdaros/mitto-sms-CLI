@@ -2,7 +2,6 @@ package mitto.sms.userinterface.command;
 
 import mitto.sms.userinterface.UserInterface;
 
-
 /**
  * Command for handling quit inputs. Command first try validate input and if validation passed command will be executed
  */

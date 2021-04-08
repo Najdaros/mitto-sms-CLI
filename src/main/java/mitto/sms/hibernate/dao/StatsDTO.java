@@ -18,6 +18,18 @@ public class StatsDTO {
         this.totalPrice = totalPrice;
     }
 
+    public String getStatsName() {
+        return statsName;
+    }
+
+    public Long getOccurrence() {
+        return occurrence;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
     @Override
     public String toString() {
         StringBuilder statsBuilder = new StringBuilder();

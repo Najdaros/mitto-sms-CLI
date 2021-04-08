@@ -5,7 +5,6 @@ import mitto.sms.hibernate.entity.Entity;
 
 import java.util.Optional;
 
-
 /**
  * Objects implementing Parser interface providing parsing String value and converting it to Entity type Objects
  * @param <T> Entity type object

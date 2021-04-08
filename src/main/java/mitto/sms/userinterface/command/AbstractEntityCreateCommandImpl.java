@@ -9,7 +9,7 @@ import mitto.sms.userinterface.parsing.exception.ParsingException;
 import java.util.Optional;
 
 /**
- * Command for handling inputs by parser format
+ * Command for handling inputs by parsering format
  * @see Parser
  */
 public class AbstractEntityCreateCommandImpl<T extends Entity> implements EntityCreateCommand {
@@ -32,7 +32,7 @@ public class AbstractEntityCreateCommandImpl<T extends Entity> implements Entity
      * Processing is trying parse command and persist parsed entity object
      * @param input for command we are trying process
      * @return true if entity was persisted, false otherwise
-     * @throws ParsingException {@link ParsingException} {@link Parser} propagate parser exception
+     * @throws ParsingException {@link ParsingException} {@link Parser} propagate parsering exception
      */
     @Override
     public boolean processCommand(String input) throws ParsingException {

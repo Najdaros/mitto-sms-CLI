@@ -31,4 +31,10 @@ public class CountryFee implements Entity {
     public CountryFee() {
     }
 
+    public CountryFee(Integer countryCode, String countryName, BigDecimal price) {
+        this.countryCode = countryCode;
+        this.countryName = countryName;
+        this.price = price;
+    }
+
 }

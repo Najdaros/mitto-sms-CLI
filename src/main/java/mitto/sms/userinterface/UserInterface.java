@@ -3,8 +3,6 @@ package mitto.sms.userinterface;
 import mitto.sms.hibernate.dao.StatsDTO;
 import mitto.sms.userinterface.command.UserCommandsHandler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
