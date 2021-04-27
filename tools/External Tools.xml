@@ -1,9 +1,16 @@
 <toolSet name="External Tools">
-  <tool name="clean tool" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+  <tool name="clean tool" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="true" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
       <option name="COMMAND" value="C:\tomcat-libs\_clean.bat" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="C:/tomcat-libs" />
+    </exec>
+  </tool>
+  <tool name="gwt core fix" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="C:\staff\proxy\fix_gwt_core.bat" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="C:/regulus_src/javacore-webapps-cms" />
     </exec>
   </tool>
 </toolSet>
