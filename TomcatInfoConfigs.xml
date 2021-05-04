@@ -4,12 +4,6 @@
       <list>
         <TomcatInfo>
           <option name="name" value="Apache Tomcat 7.0.82" />
-          <option name="number" value="1" />
-          <option name="path" value="C:\staff\tomcat_7_feed" />
-          <option name="version" value="7.0.82.0" />
-        </TomcatInfo>
-        <TomcatInfo>
-          <option name="name" value="Apache Tomcat 7.0.82" />
           <option name="path" value="C:\apache-tomcat-7.0.82" />
           <option name="version" value="7.0.82.0" />
         </TomcatInfo>
@@ -17,6 +11,12 @@
           <option name="name" value="Apache Tomcat 7.0.92" />
           <option name="path" value="C:\apache-tomcat-7.0.92" />
           <option name="version" value="7.0.92.0" />
+        </TomcatInfo>
+        <TomcatInfo>
+          <option name="name" value="Apache Tomcat 7.0.82" />
+          <option name="number" value="1" />
+          <option name="path" value="C:\staff\tomcat_7_feed" />
+          <option name="version" value="7.0.82.0" />
         </TomcatInfo>
       </list>
     </option>
